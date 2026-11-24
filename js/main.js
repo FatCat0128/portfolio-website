@@ -2,7 +2,7 @@
 // 莫蘭迪作品集 (Morandi Portfolio) - 互動核心邏輯
 // ==========================================================================
 
-// 預設 6 項精選專案資料
+// 預設精選專案資料（唯一正式資料來源：日後編輯完點擊「複製最新程式碼」覆蓋此區塊即可）
 const defaultProjects = [
   {
     id: 'p1',
@@ -41,7 +41,7 @@ const defaultProjects = [
     category: 'media',
     role: '腳本企劃 & AI 生成工具鏈整合',
     tools: ['Gemini', 'Flow AI', 'Suno AI', 'Premiere Pro'],
-    summary: '全流程運用生成式 AI 工具協作完成之永續主題主題競賽短片，涵蓋 AI 文字生成劇本、Flow 視覺繪製與 Suno 專屬配樂。',
+    summary: '全流程運用生成式 AI 工具協作完成之永續主題競賽短片，涵蓋 AI 文字生成劇本、Flow 視覺繪製與 Suno 專屬配樂。',
     description: `
       <h4 class="font-bold text-morandi-cocoa mb-2 text-base">專案亮點</h4>
       <p class="text-xs sm:text-sm text-morandi-taupe leading-relaxed mb-4">
@@ -137,6 +137,9 @@ const defaultProjects = [
   }
 ];
 
+// 檢查是否為管理員模式（網址包含 ?admin=true）
+const isAdminMode = new URLSearchParams(window.location.search).get('admin') === 'true';
+
 // 狀態變數
 let projects = [];
 let currentFilter = 'all';
@@ -144,34 +147,97 @@ let tempLocalVideoBlobUrl = '';
 
 // 頁面初始化
 window.addEventListener('DOMContentLoaded', () => {
+  setupAdminUI();
   loadProjects();
   renderProjects();
 });
 
-// 從 localStorage 讀取或使用預設資料
-function loadProjects() {
-  const saved = localStorage.getItem('infocomm_portfolio_projects');
-  if (saved) {
-    try {
-      projects = JSON.parse(saved);
-    } catch (e) {
-      projects = [...defaultProjects];
-    }
-  } else {
-    projects = [...defaultProjects];
+// 控制管理員介面顯示或隱藏（面試官打開網址時自動隱藏編輯按鈕）
+function setupAdminUI() {
+  const addBtn = document.querySelector('button[onclick="openAddModal()"]');
+  if (addBtn && !isAdminMode) {
+    addBtn.style.display = 'none';
+  }
+
+  // 在編輯表單底部自動注入「複製最新程式碼」與「重置資料」工具列
+  const form = document.getElementById('projectForm');
+  if (form && !document.getElementById('adminExportBar')) {
+    const exportBar = document.createElement('div');
+    exportBar.id = 'adminExportBar';
+    exportBar.className = 'mt-4 pt-4 border-t border-dashed border-morandi-border flex flex-wrap items-center justify-between gap-2 bg-morandi-card/60 p-3 rounded-2xl';
+    exportBar.innerHTML = `
+      <div class="text-[11px] text-morandi-taupe">
+        <strong class="text-morandi-cocoa block">同步至 GitHub 步驟：</strong>
+        編輯完畢後點擊右側按鈕，覆蓋貼回 <code class="bg-morandi-bg px-1 rounded">js/main.js</code> 最上方即可永久保存。
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" onclick="resetDefaultData()" class="px-3 py-1.5 rounded-xl text-[11px] font-medium border border-morandi-border text-morandi-taupe hover:text-morandi-cocoa bg-morandi-bg transition-all">
+          還原程式碼預設值
+        </button>
+        <button type="button" onclick="copyProjectsCode()" class="px-3.5 py-1.5 rounded-xl text-[11px] font-semibold bg-morandi-cocoa text-white hover:bg-morandi-cocoa/90 transition-all flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-code"></i>
+          <span>複製最新 defaultProjects 程式碼</span>
+        </button>
+      </div>
+    `;
+    form.appendChild(exportBar);
   }
 }
 
-// 儲存至 localStorage
+// 讀取資料：一般訪客強制讀取 defaultProjects（確保跨裝置一致）；管理員模式才讀取暫存編輯
+function loadProjects() {
+  if (isAdminMode) {
+    const saved = localStorage.getItem('infocomm_portfolio_projects');
+    if (saved) {
+      try {
+        projects = JSON.parse(saved);
+        return;
+      } catch (e) {
+        console.warn('暫存資料解析失敗，載入預設資料');
+      }
+    }
+  }
+  projects = [...defaultProjects];
+}
+
+// 儲存至 localStorage（僅供管理員本機編輯暫存使用）
 function saveProjects() {
   localStorage.setItem('infocomm_portfolio_projects', JSON.stringify(projects));
+}
+
+// 一鍵複製最新 defaultProjects 程式碼（解決跨電腦不保存問題）
+function copyProjectsCode() {
+  // 清理無效的暫存 blob 網址，避免寫入正式程式碼
+  const cleanProjects = projects.map(p => ({
+    ...p,
+    localVideoBlob: (p.localVideoBlob && p.localVideoBlob.startsWith('blob:')) ? '' : (p.localVideoBlob || '')
+  }));
+
+  const codeString = `const defaultProjects = ${JSON.stringify(cleanProjects, null, 2)};`;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(codeString).then(() => {
+      showToast('已複製最新程式碼！請貼回 js/main.js 覆蓋 defaultProjects');
+    }).catch(() => fallbackCopy(codeString));
+  } else {
+    fallbackCopy(codeString);
+  }
+}
+
+function fallbackCopy(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
+  showToast('已複製最新程式碼！請貼回 js/main.js 覆蓋 defaultProjects');
 }
 
 // 分類篩選切換
 function filterPortfolio(cat) {
   currentFilter = cat;
 
-  // 更新按鈕外觀樣式
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.remove('bg-morandi-cocoa', 'text-white', 'shadow-sm');
     btn.classList.add('text-morandi-taupe');
@@ -197,7 +263,7 @@ function renderProjects() {
     grid.innerHTML = `
       <div class="col-span-full py-12 text-center text-morandi-taupe">
         <i class="fa-regular fa-folder-open text-4xl mb-3 text-morandi-pink"></i>
-        <p class="text-sm">這個分類目前沒有作品，點擊右上角「新增 / 管理作品」新增吧！</p>
+        <p class="text-sm">這個分類目前沒有作品。</p>
       </div>
     `;
     return;
@@ -207,20 +273,29 @@ function renderProjects() {
     const card = document.createElement('div');
     card.className = 'bg-morandi-card rounded-3xl border border-morandi-border overflow-hidden morandi-shadow card-hover flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5';
 
-    // 分類徽章標籤
     let catBadge = '';
     if (p.category === 'uiux') catBadge = '<span class="badge-pink px-2.5 py-1 text-[11px] rounded-full font-medium">UI/UX 與網頁設計</span>';
     else if (p.category === 'ai') catBadge = '<span class="badge-sage px-2.5 py-1 text-[11px] rounded-full font-medium">影音</span>';
     else catBadge = '<span class="badge-cocoa px-2.5 py-1 text-[11px] rounded-full font-medium">企劃</span>';
 
-    // 工具標籤列表
     const toolsHtml = (p.tools || []).slice(0, 3).map(t =>
       `<span class="px-2 py-0.5 text-[10px] rounded-md bg-morandi-bg text-morandi-taupe border border-morandi-border">${t}</span>`
     ).join('');
 
+    // 僅在 ?admin=true 模式下顯示編輯與刪除按鈕
+    const adminActionsHtml = isAdminMode ? `
+      <div class="flex items-center gap-2">
+        <button onclick="openEditModal('${p.id}')" class="p-1.5 rounded-lg text-morandi-taupe hover:text-morandi-cocoa hover:bg-morandi-bg transition-all" title="編輯作品">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button onclick="deleteProject('${p.id}')" class="p-1.5 rounded-lg text-morandi-taupe hover:text-red-500 hover:bg-morandi-bg transition-all" title="刪除作品">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </div>
+    ` : '';
+
     card.innerHTML = `
       <div>
-        <!-- 圖片與徽章區域 -->
         <div class="relative h-48 bg-morandi-border/40 overflow-hidden cursor-pointer" onclick="openDetailModal('${p.id}')">
           <img src="${p.image || 'https://placehold.co/600x400/EFECE6/5C4D43?text=Portfolio'}" alt="${p.title}" class="w-full h-full object-cover img-hover-zoom" onerror="this.src='https://placehold.co/600x400/EFECE6/5C4D43?text=Project+Cover'">
           <div class="absolute top-3 left-3">
@@ -230,7 +305,6 @@ function renderProjects() {
           ${p.localVideoBlob ? '<div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-morandi-sage/90 text-white flex items-center justify-center text-xs shadow-md"><i class="fa-solid fa-play"></i></div>' : ''}
         </div>
 
-        <!-- 內容卡片文字 -->
         <div class="p-5">
           <div class="flex items-center gap-2 mb-2">
             <span class="text-xs font-semibold text-morandi-sageDark"><i class="fa-solid fa-user-tag mr-1"></i>${p.role || '成員'}</span>
@@ -250,21 +324,12 @@ function renderProjects() {
         </div>
       </div>
 
-      <!-- 底部動作按鈕列 -->
       <div class="px-5 pb-5 pt-2 flex items-center justify-between border-t border-morandi-border/60 text-xs">
         <button onclick="openDetailModal('${p.id}')" class="font-medium text-morandi-cocoa hover:text-morandi-pinkDark transition-colors flex items-center gap-1.5">
           <span>查看詳細細節</span>
           <i class="fa-solid fa-arrow-right-long text-[10px]"></i>
         </button>
-
-        <div class="flex items-center gap-2">
-          <button onclick="openEditModal('${p.id}')" class="p-1.5 rounded-lg text-morandi-taupe hover:text-morandi-cocoa hover:bg-morandi-bg transition-all" title="編輯作品">
-            <i class="fa-solid fa-pen-to-square"></i>
-          </button>
-          <button onclick="deleteProject('${p.id}')" class="p-1.5 rounded-lg text-morandi-taupe hover:text-red-500 hover:bg-morandi-bg transition-all" title="刪除作品">
-            <i class="fa-solid fa-trash-can"></i>
-          </button>
-        </div>
+        ${adminActionsHtml}
       </div>
     `;
 
@@ -272,19 +337,16 @@ function renderProjects() {
   });
 }
 
-// 解析 YouTube 嵌入網址
+// 解析 YouTube 嵌入網址（支援 watch、youtu.be、shorts 與參數清理）
 function getYoutubeEmbedUrl(url) {
   if (!url) return '';
   let videoId = '';
-  if (url.includes('youtu.be/')) {
-    videoId = url.split('youtu.be/')[1].split('?')[0].split('&')[0];
-  } else if (url.includes('youtube.com/watch')) {
-    const urlParams = new URLSearchParams(url.split('?')[1]);
-    videoId = urlParams.get('v');
-  } else if (url.includes('youtube.com/embed/')) {
-    return url;
+  const regExp = /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const match = url.match(regExp);
+  if (match && match[1]) {
+    videoId = match[1];
   }
-  return videoId ? `https://www.youtube.com/embed/${videoId}` : '';
+  return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}?rel=0` : '';
 }
 
 // 開啟專案詳情彈窗
@@ -295,23 +357,20 @@ function openDetailModal(id) {
   const container = document.getElementById('detailModalContent');
   const embedYt = getYoutubeEmbedUrl(p.youtubeUrl);
 
-  // 類別徽章
   let catBadge = '';
   if (p.category === 'uiux') catBadge = '<span class="badge-pink px-3 py-1 text-xs rounded-full font-medium">UI/UX 與專案管理</span>';
-  else if (p.category === 'ai') catBadge = '<span class="badge-sage px-3 py-1 text-xs rounded-full font-medium">AI 與資料架構</span>';
-  else catBadge = '<span class="badge-cocoa px-3 py-1 text-xs rounded-full font-medium">影音與行銷企劃</span>';
+  else if (p.category === 'ai') catBadge = '<span class="badge-sage px-3 py-1 text-xs rounded-full font-medium">影音</span>';
+  else catBadge = '<span class="badge-cocoa px-3 py-1 text-xs rounded-full font-medium">企劃</span>';
 
-  // 工具標籤
   const toolsHtml = (p.tools || []).map(t =>
     `<span class="px-3 py-1 text-xs rounded-xl bg-morandi-card text-morandi-cocoa border border-morandi-border font-medium">${t}</span>`
   ).join('');
 
-  // 多媒體展示區（YouTube 或本機影片或縮圖）
   let mediaSection = '';
   if (embedYt) {
     mediaSection = `
       <div class="relative w-full rounded-2xl overflow-hidden aspect-video bg-black mb-6 shadow-md">
-        <iframe src="${embedYt}" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="${embedYt}" class="w-full h-full border-0" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     `;
   } else if (p.localVideoBlob) {
@@ -328,11 +387,16 @@ function openDetailModal(id) {
     `;
   }
 
-  // Drive / Figma 外鏈按鈕
   let linksButtons = '';
-  if (p.driveUrl || p.figmaUrl) {
+  if (p.driveUrl || p.figmaUrl || p.youtubeUrl) {
     linksButtons = `
       <div class="mt-6 pt-6 border-t border-morandi-border flex flex-wrap gap-3">
+        ${p.youtubeUrl ? `
+          <a href="${p.youtubeUrl}" target="_blank" rel="noopener" class="bg-red-600/90 text-white px-4 py-2.5 rounded-2xl text-xs font-semibold hover:bg-red-700 transition-all flex items-center gap-2 shadow-sm">
+            <i class="fa-brands fa-youtube"></i>
+            <span>前往 YouTube 觀看影片</span>
+          </a>
+        ` : ''}
         ${p.driveUrl ? `
           <a href="${p.driveUrl}" target="_blank" rel="noopener" class="bg-morandi-sage text-white px-4 py-2.5 rounded-2xl text-xs font-semibold hover:bg-morandi-sageDark transition-all flex items-center gap-2 shadow-sm">
             <i class="fa-brands fa-google-drive"></i>
@@ -375,7 +439,6 @@ function openDetailModal(id) {
     ${linksButtons}
   `;
 
-  // 顯示彈窗
   const modal = document.getElementById('detailModal');
   const box = document.getElementById('detailModalContainer');
   modal.classList.remove('opacity-0', 'pointer-events-none');
@@ -444,7 +507,7 @@ function handleLocalVideoSelect(e) {
   const file = e.target.files[0];
   if (file) {
     tempLocalVideoBlobUrl = URL.createObjectURL(file);
-    document.getElementById('localVideoStatus').textContent = `已載入本機影片：${file.name}`;
+    document.getElementById('localVideoStatus').textContent = `已載入本機影片：${file.name}（注意：正式上架請將影片放入資料夾並填寫相對路徑）`;
   }
 }
 
@@ -467,7 +530,6 @@ function handleSaveProject(e) {
   const tools = toolsRaw ? toolsRaw.split(',').map(t => t.trim()).filter(Boolean) : [];
 
   if (editId) {
-    // 編輯現有專案
     const idx = projects.findIndex(p => p.id === editId);
     if (idx !== -1) {
       projects[idx] = {
@@ -476,10 +538,9 @@ function handleSaveProject(e) {
         youtubeUrl, driveUrl, figmaUrl, image,
         localVideoBlob: tempLocalVideoBlobUrl || projects[idx].localVideoBlob
       };
-      showToast('作品成功更新！');
+      showToast('作品已暫存更新！記得點擊「複製最新程式碼」保存至檔案');
     }
   } else {
-    // 新增專案
     const newProj = {
       id: 'p_' + Date.now(),
       title, category, role, tools, summary, description,
@@ -487,7 +548,7 @@ function handleSaveProject(e) {
       localVideoBlob: tempLocalVideoBlobUrl
     };
     projects.unshift(newProj);
-    showToast('新作品已新增！');
+    showToast('新作品已暫存！記得點擊「複製最新程式碼」保存至檔案');
   }
 
   saveProjects();
@@ -500,7 +561,7 @@ function deleteProject(id) {
   const p = projects.find(item => item.id === id);
   if (!p) return;
 
-  showToast(`已成功移除作品《${p.title.slice(0, 8)}...》`);
+  showToast(`已移除作品《${p.title.slice(0, 8)}...》，記得匯出更新程式碼`);
   projects = projects.filter(item => item.id !== id);
   saveProjects();
   renderProjects();
@@ -508,10 +569,10 @@ function deleteProject(id) {
 
 // 重置預設資料
 function resetDefaultData() {
+  localStorage.removeItem('infocomm_portfolio_projects');
   projects = [...defaultProjects];
-  saveProjects();
   renderProjects();
-  showToast('已重置回預設作品資料');
+  showToast('已同步回 js/main.js 內的預設資料');
 }
 
 // 匯出作品資料 JSON
@@ -551,7 +612,7 @@ function showToast(msg) {
   setTimeout(() => {
     toast.classList.remove('translate-y-0', 'opacity-100');
     toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-  }, 3000);
+  }, 3500);
 }
 
 // 參賽經驗分類篩選
