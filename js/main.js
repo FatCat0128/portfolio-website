@@ -5,137 +5,90 @@
 // 預設精選專案資料（唯一正式資料來源：日後編輯完點擊「複製最新程式碼」覆蓋此區塊即可）
 const defaultProjects = [
   {
-    id: 'p1',
-    title: '《沐光棲所》Z 世代情緒陪伴 Web App',
-    category: 'uiux',
-    role: 'PM & UI/UX 設計師（帶領 7 人跨職能團隊）',
-    tools: ['Figma', 'Live2D', 'Excel 統計檢定', 'User Flow', '手繪繪本風'],
-    summary: '專為 Z 世代量身打造的非批判性情緒陪伴平台，結合 Live2D 角色即時互動、療癒盲盒與加密傾訴傳訊，以量化問卷進行需求驗證。',
-    description: `
-      <h4 class="font-bold text-morandi-cocoa mb-2 text-base">專案背景與挑戰</h4>
-      <p class="text-xs sm:text-sm text-morandi-taupe leading-relaxed mb-4">
-        現代青年面臨高壓的情緒社交焦慮。團隊打造以「高包容度、低心理負擔」為核心的陪伴 Web App。我作為專案經理與 UI/UX 設計師，帶領 7 人團隊（涵蓋 Live2D 動畫、 UI/UX、視覺繪師與軟體工程）。
-      </p>
-
-      <h4 class="font-bold text-morandi-cocoa mb-2 text-base">關鍵解決方案</h4>
-      <ul class="list-disc list-inside text-xs sm:text-sm text-morandi-taupe leading-relaxed mb-4 space-y-1">
-        <li><strong>量化數據驗證：</strong> 主導前測問卷，以 Excel / SPSS 進行皮爾森相關係數與獨立樣本 t 檢定，確保功能切中痛點。</li>
-        <li><strong>莫蘭迪暖色調視覺：</strong> 採用大地色系與扁平手繪繪本風定調，降低使用者接觸時的視覺侵略性。</li>
-        <li><strong>Live2D 與盲盒機制：</strong> 設計觸覺與視覺雙重反饋的盲盒開啟動畫，獲得極高滿意度。</li>
-      </ul>
-
-      <h4 class="font-bold text-morandi-cocoa mb-2 text-base">設計落地與工程妥協</h4>
-      <p class="text-xs sm:text-sm text-morandi-taupe leading-relaxed">
-        在前端實作時，原本設計圖稿有複雜的手繪圖層遮罩。經與工程師討論後，優化為 CSS SVG 遮罩與精簡 Live2D 模型圖層，成功將加載效能提升 40% 且兼顧 RWD 響應式呈現。
-      </p>
-    `,
-    image: 'https://placehold.co/800x500/EFECE6/5C4D43?text=%E6%B2%90%E5%85%89%E6%A4%B9%E6%89%80+Web+App+UI',
-    youtubeUrl: '',
-    driveUrl: 'https://drive.google.com',
-    figmaUrl: 'https://figma.com',
-    localVideoBlob: ''
+    "id": "p_1795521487355",
+    "title": "這個學校有點怪-馬頭人傳說",
+    "category": "ai",
+    "role": "編劇/攝影/導演/剪輯",
+    "tools": [
+      "Pr"
+    ],
+    "summary": "以校園恐怖傳說為主題，第一人稱視角偽遊戲感影片，從腳本發想到拍攝、剪輯一手包辦。",
+    "description": "",
+    "youtubeUrl": "https://youtu.be/B1Y5mCTm26o",
+    "driveUrl": "",
+    "figmaUrl": "",
+    "image": "https://placehold.co/600x400/EFECE6/5C4D43?text=Project+Cover",
+    "localVideoBlob": ""
   },
   {
-    id: 'p2',
-    title: 'AI 永續競賽短片《未來的『貸』價》',
-    category: 'media',
-    role: '腳本企劃 & AI 生成工具鏈整合',
-    tools: ['Gemini', 'Flow AI', 'Suno AI', 'Premiere Pro'],
-    summary: '全流程運用生成式 AI 工具協作完成之永續主題競賽短片，涵蓋 AI 文字生成劇本、Flow 視覺繪製與 Suno 專屬配樂。',
-    description: `
-      <h4 class="font-bold text-morandi-cocoa mb-2 text-base">專案亮點</h4>
-      <p class="text-xs sm:text-sm text-morandi-taupe leading-relaxed mb-4">
-        探討氣候變遷與世代資源預支問題。全片自腳本發想、鏡頭語言設計到背景音效皆高度整合生成式 AI 工具鏈。
-      </p>
-      <ul class="list-disc list-inside text-xs sm:text-sm text-morandi-taupe leading-relaxed space-y-1">
-        <li>Gemini 協助擬定敘事轉折與鏡頭 Prompt 指令。</li>
-        <li>Flow 生成符合 Morandi 沉靜質感的連續影像。</li>
-        <li>Suno 自訂符合情緒起伏的低沉配樂。</li>
-      </ul>
-    `,
-    image: 'https://placehold.co/800x500/C99E9A/5C4D43?text=AI+%E6%B0%B8%E7%BA%8C%E7%9F%AD%E7%89%87',
-    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-    driveUrl: 'https://drive.google.com',
-    figmaUrl: '',
-    localVideoBlob: ''
+    "id": "p1",
+    "title": "畢業專題《沐光棲所》Z 世代情緒陪伴 App",
+    "category": "uiux",
+    "role": "UI/UX 設計師",
+    "tools": [
+      "Figma",
+      "手繪繪本風"
+    ],
+    "summary": "專為 Z 世代量身打造的 AI 情緒陪伴聊天 App，結合 Live2D 角色互動、療癒盲盒與加密傳訊，以溫馨、可愛的風格降低使用者對於 AI 聊天的戒心。",
+    "description": "",
+    "image": "https://drive.google.com/file/d/1cwFS8-XYO4eRwb6MPJ4ysrLIlvOuz8VC/view?usp=drive_link",
+    "youtubeUrl": "",
+    "driveUrl": "https://drive.google.com/file/d/1cwFS8-XYO4eRwb6MPJ4ysrLIlvOuz8VC/view?usp=drive_link",
+    "figmaUrl": "https://www.figma.com/design/EyY4ym8etNWpOiWKjxkfp4/%E7%9B%AE%E5%89%8D%E6%89%80%E6%9C%89%E9%A0%81%E9%9D%A2?node-id=0-1&t=cfejmYdCpYWDWvhu-1",
+    "localVideoBlob": ""
   },
   {
-    id: 'p3',
-    title: '《臺北共築》AI 輔助公共空間共創平台',
-    category: 'uiux',
-    role: '服務設計師 & 平台互動架構規劃',
-    tools: ['Service Blueprint', 'AI Prompt Engineering', 'Figma', 'Civic Tech'],
-    summary: '以服務設計思維切入市政參與議題，運用生成式 AI 降低市民參與社區公共空間規劃與願景提案門檻的創新機制。',
-    description: `
-      <h4 class="font-bold text-morandi-cocoa mb-2 text-base">提案核心</h4>
-      <p class="text-xs sm:text-sm text-morandi-taupe leading-relaxed mb-4">
-        市民常常對城市願景有想法，但缺乏專業建築繪圖能力。此平台允許市民輸入文字描述或上傳照片，由 AI 自動轉換為 3D 空間構想圖並公開討論。
-      </p>
-    `,
-    image: 'https://placehold.co/800x500/8FA395/5C4D43?text=%E8%87%BA%E5%8C%97%E5%85%B1%E7%AF%89+Civic+AI',
-    youtubeUrl: '',
-    driveUrl: 'https://drive.google.com',
-    figmaUrl: 'https://figma.com',
-    localVideoBlob: ''
+    "id": "p2",
+    "title": "AI 永續競賽短片《未來的『貸』價》",
+    "category": "ai",
+    "role": "腳本企劃 & AI 生成工具鏈整合",
+    "tools": [
+      "Gemini",
+      "Flow AI"
+    ],
+    "summary": "全流程運用生成式 AI 工具協作完成之永續主題主題競賽短片，涵蓋 AI 文字生成劇本、Flow 影片生成。",
+    "description": "",
+    "image": "https://placehold.co/600x400/EFECE6/5C4D43?text=Project+Cover",
+    "youtubeUrl": "",
+    "driveUrl": "",
+    "figmaUrl": "",
+    "localVideoBlob": ""
   },
   {
-    id: 'p4',
-    title: '團隊自動化知識管理工作流 (n8n × Notion)',
-    category: 'ai',
-    role: '系統架構設計師 & 工作流串接',
-    tools: ['n8n', 'Notion API', 'Discord Bot', 'WBS', '3S 知識管理'],
-    summary: '導入 3S 知識管理架構與 WBS 任務拆解，串接 n8n、Notion、Google Drive 與 Discord，實現跨平台檔案歸檔與專案通知自動化。',
-    description: `
-      <h4 class="font-bold text-morandi-cocoa mb-2 text-base">自動化架構設計</h4>
-      <p class="text-xs sm:text-sm text-morandi-taupe leading-relaxed mb-4">
-        解決團隊在溝通時檔案散落、任務追蹤遺漏的痛苦。透過自建 n8n webhook 串接 Discord 與 Notion 數據庫，自動整理決議事項並歸檔至 Google Drive 知識庫。
-      </p>
-    `,
-    image: 'https://placehold.co/800x500/EFECE6/5C4D43?text=n8n+%E8%87%AA%E5%8B%95%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81',
-    youtubeUrl: '',
-    driveUrl: 'https://drive.google.com',
-    figmaUrl: '',
-    localVideoBlob: ''
+    "id": "p3",
+    "title": "《臺北共築》AI 輔助公共空間共創平台",
+    "category": "media",
+    "role": "企劃書撰寫 & 攝影師",
+    "tools": [],
+    "summary": "以服務設計思維切入市政參與議題，運用生成式 AI 降低市民參與社區公共空間規劃與願景提案門檻的創新機制。",
+    "description": "",
+    "image": "https://placehold.co/800x500/8FA395/5C4D43?text=%E8%87%BA%E5%8C%97%E5%85%B1%E7%AF%89+Civic+AI",
+    "youtubeUrl": "",
+    "driveUrl": "https://drive.google.com",
+    "figmaUrl": "https://figma.com",
+    "localVideoBlob": ""
   },
   {
-    id: 'p5',
-    title: 'RAG 知識庫與本地端 LLM 問答系統',
-    category: 'ai',
-    role: 'AI 資料工程師 & 檢索架構搭建',
-    tools: ['Ollama (gpt-oss)', 'NotebookLM', 'Python Web Scraper', 'RAG'],
-    summary: '針對《BTS ARIRANG 世界巡迴演唱會》網路爬蟲資料進行結構化清理，結合 Ollama 本地端 LLM 建立高精準度專屬問答系統。',
-    description: `
-      <h4 class="font-bold text-morandi-cocoa mb-2 text-base">技術細節</h4>
-      <p class="text-xs sm:text-sm text-morandi-taupe leading-relaxed mb-4">
-        抓取超過 500+ 篇演唱會新聞、票務規格與交通手冊，建立向量索引。使用者可透過自然語言查詢場地規範、周邊發放時間，精準度高達 94%。
-      </p>
-    `,
-    image: 'https://placehold.co/800x500/8FA395/5C4D43?text=RAG+%E6%9C%AC%E5%9C%B0%E7%AB%AF+LLM+%E7%B3%BB%E7%B5%B1',
-    youtubeUrl: '',
-    driveUrl: 'https://drive.google.com',
-    figmaUrl: '',
-    localVideoBlob: ''
-  },
-  {
-    id: 'p6',
-    title: '《夏鹿野環球》熱氣球嘉年華整合行銷企劃',
-    category: 'media',
-    role: '行銷企劃組長 & 策略規劃',
-    tools: ['WBS', 'SMART 指標', 'SWOT 分析', 'TA 定位'],
-    summary: '針對臺東熱氣球嘉年華撰寫完整整合行銷策略書，包含數位社群擴散機制、WBS 工作分解結構與量化關鍵績效指標。',
-    description: `
-      <h4 class="font-bold text-morandi-cocoa mb-2 text-base">企劃亮點</h4>
-      <p class="text-xs sm:text-sm text-morandi-taupe leading-relaxed">
-        拆解前中後期推廣期程，設計跨平台互動活動與地方創生業者合作模式，建立具體可執行的 SMART 目標。
-      </p>
-    `,
-    image: 'https://placehold.co/800x500/C99E9A/5C4D43?text=%E6%95%B4%E5%90%88%E8%A1%8C%E9%8A%B7%E4%BC%81%E5%8A%8B%E6%9B%B8',
-    youtubeUrl: '',
-    driveUrl: 'https://drive.google.com',
-    figmaUrl: '',
-    localVideoBlob: ''
+    "id": "p6",
+    "title": "《夏鹿野環球》熱氣球嘉年華整合行銷企劃",
+    "category": "media",
+    "role": "企劃撰寫",
+    "tools": [
+      "WBS",
+      "SMART 指標",
+      "SWOT 分析",
+      "TA 定位"
+    ],
+    "summary": "針對臺東熱氣球嘉年華撰寫完整整合行銷策略書，包含WBS 工作分解結構與量化關鍵績效指標。",
+    "description": "",
+    "image": "https://placehold.co/800x500/C99E9A/5C4D43?text=%E6%95%B4%E5%90%88%E8%A1%8C%E9%8A%B7%E4%BC%81%E5%8A%8B%E6%9B%B8",
+    "youtubeUrl": "",
+    "driveUrl": "https://drive.google.com",
+    "figmaUrl": "",
+    "localVideoBlob": ""
   }
 ];
+
 
 // 檢查是否為管理員模式（網址包含 ?admin=true）
 const isAdminMode = new URLSearchParams(window.location.search).get('admin') === 'true';
