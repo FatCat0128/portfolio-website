@@ -611,6 +611,7 @@ function filterCompetitions(category) {
     }
   });
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 // 處理封面圖片上傳（自動壓縮並轉成 Base64 寫入欄位，方便隨程式碼一起匯出）
 function handleCoverImageUpload(e) {
@@ -784,6 +785,8 @@ function deleteCategory(id) {
   renderCategoryUI();
   renderProjects();
   showToast(`已刪除分類「${cat ? cat.name : ''}」`);
+=======
+>>>>>>> parent of 9dc4175 (縮圖更新)
 =======
 >>>>>>> parent of 9dc4175 (縮圖更新)
 }
