@@ -1,0 +1,98 @@
+/* ==========================================================================
+   莫蘭迪風格作品集 (Morandi Portfolio) - 獨立樣式表
+   ========================================================================== */
+
+/* 色彩變數定義 (Morandi Color Palette) */
+:root {
+  --color-morandi-bg: #F7F4F0;
+  /* 柔和米白背景 */
+  --color-morandi-card: #EFECE6;
+  /* 暖沙色卡片 */
+  --color-morandi-card-hover: #E7E3DC;
+  /* 卡片懸浮深沙色 */
+  --color-morandi-sage: #8FA395;
+  /* 莫蘭迪鼠尾草綠 */
+  --color-morandi-sage-dark: #75887B;
+  /* 深鼠尾草綠 */
+  --color-morandi-pink: #C99E9A;
+  /* 莫蘭迪乾燥粉 */
+  --color-morandi-pink-dark: #B38581;
+  /* 深乾燥粉 */
+  --color-morandi-cocoa: #5C4D43;
+  /* 主要文字可可棕 */
+  --color-morandi-taupe: #8C7F75;
+  /* 次要文字灰棕色 */
+  --color-morandi-border: #E2DDD5;
+  /* 有機邊框色 */
+  --color-morandi-accent: #D4A373;
+  /* 亮點強調色 */
+}
+
+/* 全域基礎樣式 */
+body {
+  background-color: var(--color-morandi-bg);
+  color: var(--color-morandi-cocoa);
+  font-family: 'Noto Sans TC', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* 自訂捲軸樣式 (Custom Scrollbar) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-morandi-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-morandi-pink);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-morandi-pink-dark);
+}
+
+/* 莫蘭迪柔和陰影與邊框 (Soft Shadow & Borders) */
+.morandi-shadow {
+  box-shadow: 0 10px 30px -10px rgba(92, 77, 67, 0.08);
+}
+
+.morandi-shadow-lg {
+  box-shadow: 0 20px 40px -15px rgba(92, 77, 67, 0.12);
+}
+
+/* 模態框背景模糊遮罩 (Modal Backdrop Blur) */
+.glass-backdrop {
+  background: rgba(92, 77, 67, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* 標籤徽章樣式 (Tag Pills) */
+.badge-sage {
+  background-color: rgba(143, 163, 149, 0.18);
+  color: #4D6154;
+}
+
+.badge-pink {
+  background-color: rgba(201, 158, 154, 0.2);
+  color: #8C534F;
+}
+
+.badge-cocoa {
+  background-color: rgba(92, 77, 67, 0.1);
+  color: #5C4D43;
+}
+
+/* 圖片懸浮微放大動效 (Smooth Image Hover Zoom) */
+.img-hover-zoom {
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card-hover:hover .img-hover-zoom {
+  transform: scale(1.04);
+}

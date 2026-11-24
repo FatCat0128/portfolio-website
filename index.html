@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>個人履歷 | Portfolio & Resume</title>
+
+  <!-- Google Fonts: Noto Sans TC & Noto Serif TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            morandi: {
+              bg: '#F7F4F0',        /* Creamy off-white */
+              card: '#EFECE6',      /* Warm sand/beige */
+              cardHover: '#E7E3DC', /* Darker warm sand */
+              sage: '#8FA395',      /* Muted sage green */
+              sageDark: '#75887B',
+              pink: '#C99E9A',      /* Dusty Morandi pink */
+              pinkDark: '#B38581',
+              cocoa: '#5C4D43',     /* Main typography */
+              taupe: '#8C7F75',     /* Muted secondary text */
+              border: '#E2DDD5',    /* Organic subtle border */
+              accent: '#D4A373'
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans TC"', 'sans-serif'],
+            serif: ['"Noto Serif TC"', 'serif']
+          },
+          borderRadius: {
+            '2xl': '1.25rem',
+            '3xl': '1.75rem',
+            '4xl': '2.25rem'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="min-h-screen flex flex-col selection:bg-morandi-pink selection:text-white">
+
+  <!-- Toast Notification Container -->
+  <div id="toast"
+    class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 ease-out bg-morandi-cocoa text-white px-5 py-3 rounded-2xl shadow-xl flex items-center space-x-3 pointer-events-none">
+    <i id="toastIcon" class="fa-solid fa-circle-check text-morandi-sage text-lg"></i>
+    <span id="toastMsg" class="text-sm font-medium">操作成功</span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-30 bg-[#F7F4F0]/85 backdrop-blur-md border-b border-morandi-border/60 transition-all">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <img src="證件照肖像.png" alt="個人頭像"
+          class="w-10 h-10 rounded-full object-cover border border-morandi-border shadow-sm group-hover:scale-105 transition-all duration-300">
+        <div>
+          <span class="block font-serif font-bold text-morandi-cocoa text-lg leading-none tracking-tight">Phoebe
+          </span>
+          <span class="text-xs text-morandi-taupe">UI/UX 設計 • 專案企劃 • 影像敘事</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-morandi-taupe">
+        <a href="#about" class="hover:text-morandi-cocoa transition-colors">關於我</a>
+        <a href="#skills" class="hover:text-morandi-cocoa transition-colors">專業技能</a>
+        <a href="#competitions" class="hover:text-morandi-cocoa transition-colors">參賽經驗</a>
+        <a href="#portfolio" class="hover:text-morandi-cocoa transition-colors">作品集</a>
+        <a href="#interests" class="hover:text-morandi-cocoa transition-colors">興趣</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="openAddModal()"
+          class="inline-flex items-center gap-2 bg-morandi-sage text-white px-4 py-2 rounded-2xl text-sm font-medium hover:bg-morandi-sageDark transition-all duration-300 shadow-sm">
+          <i class="fa-solid fa-plus text-xs"></i>
+          <span>新增 / 管理作品</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+
+    <!-- Hero / About Me Section -->
+    <section id="about" class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-16">
+      <div
+        class="bg-morandi-card rounded-4xl p-6 sm:p-10 md:p-12 border border-morandi-border morandi-shadow relative overflow-hidden">
+
+        <!-- Subtle Decorative Background Circles -->
+        <div class="absolute -top-16 -right-16 w-64 h-64 bg-morandi-pink/15 rounded-full blur-2xl pointer-events-none">
+        </div>
+        <div
+          class="absolute -bottom-16 -left-16 w-64 h-64 bg-morandi-sage/15 rounded-full blur-2xl pointer-events-none">
+        </div>
+
+        <div class="grid md:grid-cols-12 gap-8 items-center relative z-10">
+
+          <!-- Avatar / Profile Badge -->
+          <div class="md:col-span-4 flex flex-col items-center text-center">
+            <div class="relative group">
+              <div
+                class="w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-gradient-to-tr from-morandi-pink/30 to-morandi-sage/30 p-1.5 morandi-shadow transition-transform duration-500 group-hover:scale-105">
+                <img src="畢展照.jpg" alt="個人肖像"
+                  class="w-full h-full rounded-[1.25rem] object-cover object-top border border-morandi-border/60">
+              </div>
+              <span
+                class="absolute -bottom-2 right-2 bg-morandi-sage text-white text-xs px-3 py-1 rounded-full shadow-md font-medium z-10">
+                <i class="fa-solid fa-check-circle mr-1"></i>應屆實習準備中
+              </span>
+            </div>
+
+            <div class="mt-4 flex flex-wrap justify-center gap-2">
+              <span class="px-3 py-1 text-xs rounded-full badge-pink font-medium">UI/UX 設計</span>
+              <span class="px-3 py-1 text-xs rounded-full badge-sage font-medium">企劃</span>
+              <span class="px-3 py-1 text-xs rounded-full badge-cocoa font-medium">剪輯</span>
+            </div>
+          </div>
+
+          <!-- Bio Content -->
+          <div class="md:col-span-8 flex flex-col justify-center">
+            <div class="inline-flex items-center gap-2 text-morandi-sageDark text-sm font-semibold mb-2">
+              <i class="fa-solid fa-sparkles"></i> UI/UX DESIGN • PLANNING • MEDIA
+            </div>
+
+            <h1 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-morandi-cocoa leading-tight mb-4">
+              以同理心出發的產品設計，<br class="hidden sm:block">結合 <span
+                class="text-morandi-pinkDark underline decoration-morandi-pink/40 underline-offset-8">數據洞察</span> 與
+              <span class="text-morandi-sageDark underline decoration-morandi-sage/40 underline-offset-8">影像敘事</span>
+            </h1>
+
+            <p class="text-morandi-cocoa/90 text-sm sm:text-base leading-relaxed mb-6">
+              來自世新大學資訊傳播學系的學生，專注於 UI/UX
+              介面設計、專案企劃協作與影音製作。我相信優秀的產品不只擁有手繪感的溫暖視覺與滑順體驗，更需要透過質性訪談與量化統計捕捉使用者需求。擅長在跨職能團隊中推進專案落地，並結合腳本編劇與影音剪輯能力，將抽象概念轉化為有溫度的數位體驗。
+            </p>
+
+            <!-- Quick Action Links -->
+            <div class="flex flex-wrap items-center gap-3">
+              <a href="#portfolio"
+                class="bg-morandi-cocoa text-white px-5 py-2.5 rounded-2xl text-sm font-medium hover:bg-morandi-cocoa/90 transition-all shadow-md flex items-center gap-2">
+                <i class="fa-solid fa-compass text-morandi-pink"></i>
+                <span>瀏覽精選作品</span>
+              </a>
+              <button onclick="copyContactEmail()"
+                class="bg-morandi-bg border border-morandi-border text-morandi-cocoa px-5 py-2.5 rounded-2xl text-sm font-medium hover:bg-white transition-all flex items-center gap-2">
+                <i class="fa-regular fa-envelope text-morandi-sageDark"></i>
+                <span>複製 Email 聯繫</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Skills & Tools Section -->
+    <section id="skills" class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+        <div>
+          <h2 class="font-serif text-2xl font-bold text-morandi-cocoa flex items-center gap-3">
+            <i class="fa-solid fa-layer-group text-morandi-pink"></i> 專業技能與工具箱
+          </h2>
+          <p class="text-sm text-morandi-taupe mt-1">從使用者研究、介面設計到企劃落地與影音敘事</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Skill Card 1 -->
+        <div
+          class="bg-morandi-card p-5 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300">
+          <div
+            class="w-10 h-10 rounded-2xl bg-morandi-pink/20 text-morandi-pinkDark flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-compass-drafting"></i>
+          </div>
+          <h3 class="font-bold text-morandi-cocoa mb-2">UI/UX 介面設計</h3>
+          <p class="text-xs text-morandi-taupe leading-relaxed mb-4">負責視覺風格定調與手繪氛圍塑造，建立一致的介面元件規範，並與前端工程師溝通實作細節。</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">Figma</span>
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">使用者體驗
+            </span>
+          </div>
+        </div>
+
+        <!-- Skill Card 2 -->
+        <div
+          class="bg-morandi-card p-5 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300">
+          <div
+            class="w-10 h-10 rounded-2xl bg-morandi-sage/20 text-morandi-sageDark flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-clipboard-list"></i>
+          </div>
+          <h3 class="font-bold text-morandi-cocoa mb-2">企劃發想與協作</h3>
+          <p class="text-xs text-morandi-taupe leading-relaxed mb-4">共同協作撰寫專案企劃書，拆解執行時程與 WBS 工作結構，協調跨職能團隊分工以推動專案落地。</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">WBS
+              時程表</span>
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">跨職能溝通</span>
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">提案企劃</span>
+
+          </div>
+        </div>
+
+        <!-- Skill Card 3 -->
+        <div
+          class="bg-morandi-card p-5 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300">
+          <div
+            class="w-10 h-10 rounded-2xl bg-amber-500/15 text-amber-700 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <h3 class="font-bold text-morandi-cocoa mb-2">質性研究與量化統計</h3>
+          <p class="text-xs text-morandi-taupe leading-relaxed mb-4">設計訪談大綱與量化問卷題目，後續進行統計數據分析並驗證研究假說。</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">Excel
+              統計分析</span>
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">問卷與訪談</span>
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">假說設計</span>
+          </div>
+        </div>
+
+        <!-- Skill Card 4 -->
+        <div
+          class="bg-morandi-card p-5 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300">
+          <div
+            class="w-10 h-10 rounded-2xl bg-purple-500/15 text-purple-700 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-clapperboard"></i>
+          </div>
+          <h3 class="font-bold text-morandi-cocoa mb-2">影片剪輯</h3>
+          <p class="text-xs text-morandi-taupe leading-relaxed mb-4">具備創意發想、腳本編劇與後製剪輯能力，修畢系上兩門專業選修與一門影音剪輯通識課程，並能結合 AI
+            工具輔助短影音生成。
+          </p>
+          <div class="flex flex-wrap gap-1.5">
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">Adobe
+              Pr
+            </span>
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">腳本編劇
+            </span>
+            <span
+              class="px-2.5 py-1 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">AI
+              工具協作
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Competitions Section -->
+    <section id="competitions" class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+        <div>
+          <h2 class="font-serif text-2xl font-bold text-morandi-cocoa flex items-center gap-3">
+            <i class="fa-solid fa-trophy text-morandi-pink"></i> 參賽經驗
+          </h2>
+          <p class="text-sm text-morandi-taupe mt-1">
+            多元跨域實踐，涵蓋短影音創作與編劇、公共政策創意提案與連續四學期讀書會特優榮譽
+          </p>
+        </div>
+
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="filterCompetitions('all')" data-comp-filter="all"
+            class="comp-filter-btn px-3.5 py-1.5 rounded-2xl text-xs sm:text-sm font-medium transition-all bg-morandi-cocoa text-white shadow-sm">
+            全部 (9)
+          </button>
+          <button onclick="filterCompetitions('video')" data-comp-filter="video"
+            class="comp-filter-btn px-3.5 py-1.5 rounded-2xl text-xs sm:text-sm font-medium transition-all bg-morandi-card text-morandi-taupe hover:text-morandi-cocoa border border-morandi-border">
+            短影音與 AI (3)
+          </button>
+          <button onclick="filterCompetitions('create')" data-comp-filter="create"
+            class="comp-filter-btn px-3.5 py-1.5 rounded-2xl text-xs sm:text-sm font-medium transition-all bg-morandi-card text-morandi-taupe hover:text-morandi-cocoa border border-morandi-border">
+            創意文學與提案 (2)
+          </button>
+          <button onclick="filterCompetitions('study')" data-comp-filter="study"
+            class="comp-filter-btn px-3.5 py-1.5 rounded-2xl text-xs sm:text-sm font-medium transition-all bg-morandi-card text-morandi-taupe hover:text-morandi-cocoa border border-morandi-border">
+            讀書會特優 (4)
+          </button>
+        </div>
+      </div>
+
+      <!-- Competition Cards Grid -->
+      <div id="competitionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- Competition 01 -->
+        <div
+          class="competition-card bg-morandi-card p-5 sm:p-6 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+          data-category="video">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="text-xs font-serif font-bold text-morandi-taupe bg-morandi-bg/90 px-2.5 py-1 rounded-xl border border-morandi-border">
+                2024
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-morandi-pink/20 text-morandi-pinkDark border border-morandi-pink/30 shadow-sm">
+                <i class="fa-solid fa-award text-morandi-pink"></i> 入圍
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3 my-2">
+              <div
+                class="w-9 h-9 rounded-xl bg-morandi-pink/20 text-morandi-pinkDark flex-shrink-0 flex items-center justify-center text-sm mt-0.5">
+                <i class="fa-solid fa-clapperboard"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-base sm:text-lg font-bold text-morandi-cocoa leading-snug">
+                  Short出人權精彩－2024人權短影音創作競賽
+                </h3>
+                <div
+                  class="mt-1.5 inline-flex items-center gap-1.5 text-xs text-morandi-sageDark font-medium bg-morandi-sage/10 px-2.5 py-0.5 rounded-lg border border-morandi-sage/20">
+                  <i class="fa-solid fa-user-gear text-[10px]"></i>
+                  <span>角色：影片佈景</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4 mt-2">
+              聚焦人權核心價值議題，負責遊戲畫面中場景陳設與氛圍設計，展現具感染力與省思深度的影音敘事。
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-morandi-border/60 flex flex-wrap gap-1.5">
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">短影音競賽</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">影片佈景</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">視覺美學</span>
+          </div>
+        </div>
+
+        <!-- Competition 02 -->
+        <div
+          class="competition-card bg-morandi-card p-5 sm:p-6 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+          data-category="create">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="text-xs font-serif font-bold text-morandi-taupe bg-morandi-bg/90 px-2.5 py-1 rounded-xl border border-morandi-border">
+                2025
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-morandi-sage/20 text-morandi-sageDark border border-morandi-sage/30">
+                <i class="fa-solid fa-paper-plane text-morandi-sage"></i> 參賽作品
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3 my-2">
+              <div
+                class="w-9 h-9 rounded-xl bg-morandi-sage/20 text-morandi-sageDark flex-shrink-0 flex items-center justify-center text-sm mt-0.5">
+                <i class="fa-solid fa-scroll"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-base sm:text-lg font-bold text-morandi-cocoa leading-snug">
+                  2025全國創意文學競賽—第八屆奇幻獎翻轉懸賞單挑戰
+                </h3>
+              </div>
+            </div>
+
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4 mt-2">
+              突破傳統單向敘事，透過顛覆性的懸賞單概念重塑奇幻世界觀與人物心理動機，呈現完整世界觀。
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-morandi-border/60 flex flex-wrap gap-1.5">
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">創意文學</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">奇幻世界觀</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">故事敘事</span>
+          </div>
+        </div>
+
+        <!-- Competition 06 -->
+        <div
+          class="competition-card bg-morandi-card p-5 sm:p-6 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+          data-category="create">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="text-xs font-serif font-bold text-morandi-taupe bg-morandi-bg/90 px-2.5 py-1 rounded-xl border border-morandi-border">
+                2025
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-morandi-sage/20 text-morandi-sageDark border border-morandi-sage/30">
+                <i class="fa-solid fa-paper-plane text-morandi-sage"></i> 參賽提案
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3 my-2">
+              <div
+                class="w-9 h-9 rounded-xl bg-morandi-pink/20 text-morandi-pinkDark flex-shrink-0 flex items-center justify-center text-sm mt-0.5">
+                <i class="fa-solid fa-lightbulb"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-base sm:text-lg font-bold text-morandi-cocoa leading-snug">
+                  2025公共政策創意提案競賽
+                </h3>
+                <div
+                  class="mt-1.5 inline-flex items-center gap-1.5 text-xs text-morandi-sageDark font-medium bg-morandi-sage/10 px-2.5 py-0.5 rounded-lg border border-morandi-sage/20">
+                  <i class="fa-solid fa-user-gear text-[10px]"></i>
+                  <span>角色：企劃發想 / 攝影</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4 mt-2">
+              洞察當前社會公共議題痛點，負責企劃發想，以「臺北共築」為主題，希望促進台北市民參與公共空間之決策。
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-morandi-border/60 flex flex-wrap gap-1.5">
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">公共政策</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">企劃發想</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">影片拍攝</span>
+          </div>
+        </div>
+
+        <!-- Competition 07 -->
+        <div
+          class="competition-card bg-morandi-card p-5 sm:p-6 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+          data-category="video">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="text-xs font-serif font-bold text-morandi-taupe bg-morandi-bg/90 px-2.5 py-1 rounded-xl border border-morandi-border">
+                2025
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-morandi-sage/20 text-morandi-sageDark border border-morandi-sage/30">
+                <i class="fa-solid fa-paper-plane text-morandi-sage"></i> 參賽作品
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3 my-2">
+              <div
+                class="w-9 h-9 rounded-xl bg-morandi-pink/20 text-morandi-pinkDark flex-shrink-0 flex items-center justify-center text-sm mt-0.5">
+                <i class="fa-solid fa-film"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-base sm:text-lg font-bold text-morandi-cocoa leading-snug">
+                  2025全國大專校院 SDGs × AI 短影音競賽
+                </h3>
+                <div
+                  class="mt-1.5 inline-flex items-center gap-1.5 text-xs text-morandi-sageDark font-medium bg-morandi-sage/10 px-2.5 py-0.5 rounded-lg border border-morandi-sage/20">
+                  <i class="fa-solid fa-user-gear text-[10px]"></i>
+                  <span>角色：導演 / 編劇</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4 mt-2">
+              扣合聯合國 SDGs 永續發展目標，擔任導演與原創劇本編撰，協同生成式 AI 工具輔助分鏡構想與影片生成，以校園為背景，講述無形中所付出的電力、水力等代價。
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-morandi-border/60 flex flex-wrap gap-1.5">
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">SDGs
+              永續</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">短影音
+              / 編劇</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">AI
+            </span>
+          </div>
+        </div>
+
+        <!-- Competition 08 -->
+        <div
+          class="competition-card bg-morandi-card p-5 sm:p-6 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+          data-category="study">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="text-xs font-serif font-bold text-morandi-taupe bg-morandi-bg/90 px-2.5 py-1 rounded-xl border border-morandi-border">
+                113-1
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-800 border border-amber-500/20 shadow-sm">
+                <i class="fa-solid fa-trophy text-amber-600"></i> 特優
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3 my-2">
+              <div
+                class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-700 flex-shrink-0 flex items-center justify-center text-sm mt-0.5">
+                <i class="fa-solid fa-book-open-reader"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-base sm:text-lg font-bold text-morandi-cocoa leading-snug">
+                  113學年度第1學期世新大學讀書會
+                </h3>
+                <div
+                  class="mt-1.5 inline-flex items-center gap-1.5 text-xs text-amber-800 font-medium bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/20">
+                  <i class="fa-solid fa-star text-[10px]"></i>
+                  <span>全校評比特優肯定</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4 mt-2">
+              與團隊開展跨領域主題共讀，深入探討 AI 時代科技演變、人際互動與自我覺察等核心議題，透過結構化導讀與多面向思辨，建立深刻共讀討論機制，榮獲全校評比特優。
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-morandi-border/60 flex flex-wrap gap-1.5">
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">世新讀書會</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">科技與人類</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">特優肯定</span>
+          </div>
+        </div>
+
+        <!-- Competition 09 -->
+        <div
+          class="competition-card bg-morandi-card p-5 sm:p-6 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+          data-category="study">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="text-xs font-serif font-bold text-morandi-taupe bg-morandi-bg/90 px-2.5 py-1 rounded-xl border border-morandi-border">
+                113-2
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-800 border border-amber-500/20 shadow-sm">
+                <i class="fa-solid fa-trophy text-amber-600"></i> 特優
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3 my-2">
+              <div
+                class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-700 flex-shrink-0 flex items-center justify-center text-sm mt-0.5">
+                <i class="fa-solid fa-book-open-reader"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-base sm:text-lg font-bold text-morandi-cocoa leading-snug">
+                  113學年度第2學期世新大學讀書會
+                </h3>
+                <div
+                  class="mt-1.5 inline-flex items-center gap-1.5 text-xs text-amber-800 font-medium bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/20">
+                  <i class="fa-solid fa-star text-[10px]"></i>
+                  <span>連續特優殊榮</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4 mt-2">
+              與團隊聚焦數位傳播與科技趨勢，深入探討 AI 應用正當性、迷因傳播機制、3C 依賴與資訊行銷策略等議題，蟬聯全校讀書會評比特優。
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-morandi-border/60 flex flex-wrap gap-1.5">
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">世新讀書會</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">傳播與科技趨勢</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">連續特優</span>
+          </div>
+        </div>
+
+        <!-- Competition 10 -->
+        <div
+          class="competition-card bg-morandi-card p-5 sm:p-6 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+          data-category="study">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="text-xs font-serif font-bold text-morandi-taupe bg-morandi-bg/90 px-2.5 py-1 rounded-xl border border-morandi-border">
+                114-1
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-800 border border-amber-500/20 shadow-sm">
+                <i class="fa-solid fa-trophy text-amber-600"></i> 特優
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3 my-2">
+              <div
+                class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-700 flex-shrink-0 flex items-center justify-center text-sm mt-0.5">
+                <i class="fa-solid fa-book-open-reader"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-base sm:text-lg font-bold text-morandi-cocoa leading-snug">
+                  114學年度第1學期世新大學讀書會
+                </h3>
+                <div
+                  class="mt-1.5 inline-flex items-center gap-1.5 text-xs text-amber-800 font-medium bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/20">
+                  <i class="fa-solid fa-star text-[10px]"></i>
+                  <span>三度蟬聯特優</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4 mt-2">
+              與團隊展開心理成長與社會觀察共讀，深入探討工作價值、自我療癒、破除偏見標籤與常態界線等議題，第三度獲評全校特優殊榮。
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-morandi-border/60 flex flex-wrap gap-1.5">
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">世新讀書會</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">心理成長</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">三度特優</span>
+          </div>
+        </div>
+
+        <!-- Competition 11 -->
+        <div
+          class="competition-card bg-morandi-card p-5 sm:p-6 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+          data-category="study">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="text-xs font-serif font-bold text-morandi-taupe bg-morandi-bg/90 px-2.5 py-1 rounded-xl border border-morandi-border">
+                114-2
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-800 border border-amber-500/20 shadow-sm">
+                <i class="fa-solid fa-trophy text-amber-600"></i> 特優
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3 my-2">
+              <div
+                class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-700 flex-shrink-0 flex items-center justify-center text-sm mt-0.5">
+                <i class="fa-solid fa-book-open-reader"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-base sm:text-lg font-bold text-morandi-cocoa leading-snug">
+                  114學年度第2學期世新大學讀書會
+                </h3>
+                <div
+                  class="mt-1.5 inline-flex items-center gap-1.5 text-xs text-amber-800 font-medium bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/20">
+                  <i class="fa-solid fa-crown text-[10px]"></i>
+                  <span>連續四學期特優大滿貫</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4 mt-2">
+              與團隊進行經典文學深度共讀，深入探討存在荒謬、生死辯證、親密關係與社會框架等核心議題，達成連續四學期榮獲「特優」的亮眼全校紀錄。
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-morandi-border/60 flex flex-wrap gap-1.5">
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">世新讀書會</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">社會框架</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">知識庫積累</span>
+          </div>
+        </div>
+
+        <!-- Competition 12 -->
+        <div
+          class="competition-card bg-morandi-card p-5 sm:p-6 rounded-3xl border border-morandi-border morandi-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+          data-category="video">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span
+                class="text-xs font-serif font-bold text-morandi-taupe bg-morandi-bg/90 px-2.5 py-1 rounded-xl border border-morandi-border">
+                2025
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-morandi-pink/20 text-morandi-pinkDark border border-morandi-pink/30 shadow-sm">
+                <i class="fa-solid fa-award text-morandi-pink"></i> 入圍
+              </span>
+            </div>
+
+            <div class="flex items-start gap-3 my-2">
+              <div
+                class="w-9 h-9 rounded-xl bg-morandi-pink/20 text-morandi-pinkDark flex-shrink-0 flex items-center justify-center text-sm mt-0.5">
+                <i class="fa-solid fa-video"></i>
+              </div>
+              <div>
+                <h3 class="font-serif text-base sm:text-lg font-bold text-morandi-cocoa leading-snug">
+                  2025年世新大學第三屆世鑫獎—短影音組
+                </h3>
+                <div
+                  class="mt-1.5 inline-flex items-center gap-1.5 text-xs text-morandi-sageDark font-medium bg-morandi-sage/10 px-2.5 py-0.5 rounded-lg border border-morandi-sage/20">
+                  <i class="fa-solid fa-user-gear text-[10px]"></i>
+                  <span>角色：編劇 / 影片素材生成</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4 mt-2">
+              角逐世新大學傳播影音代表性大獎「世鑫獎」，負責撰寫劇本與部分素材生成，以校園中學生辛苦奔波為題材，產出「續命大作戰」一片。
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-morandi-border/60 flex flex-wrap gap-1.5">
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">世鑫獎</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">編劇劇本</span>
+            <span
+              class="px-2 py-0.5 text-[11px] rounded-lg bg-morandi-bg text-morandi-cocoa border border-morandi-border">AI
+              素材生成</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Portfolio Showcase Section -->
+    <section id="portfolio" class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+
+      <!-- Section Header & Filter Tabs -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-semibold tracking-wider text-morandi-sageDark uppercase">Interactive
+            Portfolio</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-morandi-cocoa mt-1 flex items-center gap-3">
+            <i class="fa-solid fa-folder-open text-morandi-sage"></i> 專題與作品藝廊
+          </h2>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap items-center gap-2 bg-morandi-card p-1.5 rounded-2xl border border-morandi-border">
+          <button onclick="filterPortfolio('all')" id="btn-filter-all"
+            class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-morandi-cocoa text-white shadow-sm transition-all">
+            全部專案
+          </button>
+          <button onclick="filterPortfolio('uiux')" id="btn-filter-uiux"
+            class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-morandi-taupe hover:text-morandi-cocoa transition-all">
+            UI/UX 與網頁設計
+          </button>
+          <button onclick="filterPortfolio('ai')" id="btn-filter-ai"
+            class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-morandi-taupe hover:text-morandi-cocoa transition-all">
+            影音
+          </button>
+          <button onclick="filterPortfolio('media')" id="btn-filter-media"
+            class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-morandi-taupe hover:text-morandi-cocoa transition-all">
+            企劃
+          </button>
+        </div>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- JS will render dynamic project cards here -->
+      </div>
+    </section>
+
+    <!-- Personal Interests & Soft Skills Section -->
+    <section id="interests" class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+      <div class="bg-morandi-card/70 rounded-4xl p-6 sm:p-10 border border-morandi-border">
+        <div class="mb-8">
+          <h2 class="font-serif text-2xl font-bold text-morandi-cocoa flex items-center gap-3">
+            <i class="fa-solid fa-heart text-morandi-pink"></i> 興趣
+          </h2>
+          <p class="text-sm text-morandi-taupe mt-1">將無關專業的興趣翻譯成產品設計與團隊溝通中的隱性價值</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Interest 1 -->
+          <div
+            class="bg-morandi-bg p-6 rounded-3xl border border-morandi-border morandi-shadow relative group hover:border-morandi-pink/50 transition-all">
+            <div
+              class="w-12 h-12 rounded-2xl bg-morandi-pink/20 text-morandi-pinkDark flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-book-open-reader"></i>
+            </div>
+            <h3 class="font-serif font-bold text-morandi-cocoa text-lg mb-2">文學讀書會導讀</h3>
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4">
+              參與文學讀書會，擅長拆解角色的動機與心理、探討社會現象。
+            </p>
+            <div
+              class="pt-3 border-t border-morandi-border/60 text-xs text-morandi-cocoa font-medium flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right-to-bracket text-morandi-pink"></i>
+              <span>轉化為：高感知的同理心與使用者心理剖析</span>
+            </div>
+          </div>
+
+          <!-- Interest 2 -->
+          <div
+            class="bg-morandi-bg p-6 rounded-3xl border border-morandi-border morandi-shadow relative group hover:border-morandi-sage/50 transition-all">
+            <div
+              class="w-12 h-12 rounded-2xl bg-morandi-sage/20 text-morandi-sageDark flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-scissors"></i>
+            </div>
+            <h3 class="font-serif font-bold text-morandi-cocoa text-lg mb-2">毛線鉤針編織</h3>
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4">
+              享受從一團毛線逐針構築成立體作品的過程，喜歡透過不同針法變化與色彩搭配，編織出療癒的生活小物。
+            </p>
+            <div
+              class="pt-3 border-t border-morandi-border/60 text-xs text-morandi-cocoa font-medium flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right-to-bracket text-morandi-sageDark"></i>
+              <span>對結構邏輯的耐心拆解，以及對色彩與材質細節的敏銳度</span>
+            </div>
+          </div>
+
+          <!-- Interest 3 -->
+          <div
+            class="bg-morandi-bg p-6 rounded-3xl border border-morandi-border morandi-shadow relative group hover:border-amber-400/50 transition-all">
+            <div
+              class="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-700 flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid fa-icons"></i>
+            </div>
+            <h3 class="font-serif font-bold text-morandi-cocoa text-lg mb-2">韓國流行音樂文化觀察</h3>
+            <p class="text-xs text-morandi-taupe leading-relaxed mb-4">
+              關注 K-POP 產業趨勢與視覺企劃，觀察粉絲社群的互動生態、周邊設計巧思，以及線上線下的應援體驗。
+            </p>
+            <div
+              class="pt-3 border-t border-morandi-border/60 text-xs text-morandi-cocoa font-medium flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right-to-bracket text-amber-700"></i>
+              <span>挖掘目標受眾痛點，與互動體驗設計洞察</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer / Contact Section -->
+  <footer class="bg-morandi-cocoa text-morandi-bg py-12 border-t border-morandi-border/30 mt-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-8 border-b border-white/10">
+
+        <div>
+          <span class="text-xs uppercase tracking-widest text-morandi-pink font-semibold">Ready for Internship</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold mt-1">讓我們一起創作更有溫度的產品</h2>
+          <p class="text-xs sm:text-sm text-morandi-bg/70 mt-2">尋求 UI/UX 設計、數位媒體與 AI 實習機會</p>
+        </div>
+
+        <!-- Social & Contact Links -->
+        <div class="flex flex-wrap items-center gap-4">
+          <button onclick="copyContactEmail()"
+            class="bg-morandi-pink hover:bg-morandi-pinkDark text-white px-5 py-3 rounded-2xl text-sm font-medium transition-all shadow-md flex items-center gap-2">
+            <i class="fa-solid fa-envelope"></i>
+            <span>a112070010@mail.shu.edu.tw</span>
+          </button>
+
+          <a href="https://github.com/FatCat0128" target="_blank" rel="noopener"
+            class="w-11 h-11 rounded-2xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all">
+            <i class="fa-brands fa-github text-lg"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-morandi-bg/60 gap-4">
+        <p>© 2026 資訊傳播學系作品集系統. Designed with Morandi Warmth & Care.</p>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- 1. Project Detail Modal -->
+  <div id="detailModal"
+    class="fixed inset-0 z-50 glass-backdrop flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div
+      class="bg-morandi-bg rounded-4xl max-w-4xl w-full max-h-[90vh] overflow-y-auto morandi-shadow-lg border border-morandi-border p-6 sm:p-8 relative transform scale-95 transition-transform duration-300"
+      id="detailModalContainer">
+
+      <!-- Close Button -->
+      <button onclick="closeDetailModal()"
+        class="absolute top-6 right-6 w-10 h-10 rounded-full bg-morandi-card border border-morandi-border text-morandi-cocoa hover:bg-morandi-cocoa hover:text-white transition-all flex items-center justify-center text-base z-10">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div id="detailModalContent">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Add / Edit Project Modal -->
+  <div id="addModal"
+    class="fixed inset-0 z-50 glass-backdrop flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div
+      class="bg-morandi-bg rounded-4xl max-w-2xl w-full max-h-[90vh] overflow-y-auto morandi-shadow-lg border border-morandi-border p-6 sm:p-8 relative transform scale-95 transition-transform duration-300"
+      id="addModalContainer">
+
+      <button onclick="closeAddModal()"
+        class="absolute top-6 right-6 w-10 h-10 rounded-full bg-morandi-card border border-morandi-border text-morandi-cocoa hover:bg-morandi-cocoa hover:text-white transition-all flex items-center justify-center text-base">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <h3 class="font-serif font-bold text-2xl text-morandi-cocoa mb-6 flex items-center gap-3">
+        <i class="fa-solid fa-square-plus text-morandi-sage"></i> 新增 / 編輯作品
+      </h3>
+
+      <form id="projectForm" onsubmit="handleSaveProject(event)" class="space-y-4">
+        <input type="hidden" id="editProjectId" value="">
+
+        <div>
+          <label class="block text-xs font-bold text-morandi-cocoa mb-1">作品名稱 *</label>
+          <input type="text" id="formTitle" required placeholder="例如：《沐光棲所》Z 世代情緒陪伴 App"
+            class="w-full px-4 py-2.5 rounded-2xl bg-morandi-card border border-morandi-border text-sm text-morandi-cocoa focus:outline-none focus:ring-2 focus:ring-morandi-sage">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-morandi-cocoa mb-1">作品分類 *</label>
+            <select id="formCategory" required
+              class="w-full px-4 py-2.5 rounded-2xl bg-morandi-card border border-morandi-border text-sm text-morandi-cocoa focus:outline-none focus:ring-2 focus:ring-morandi-sage">
+              <option value="uiux">UI/UX 與網頁設計</option>
+              <option value="ai">影音</option>
+              <option value="media">企劃</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-morandi-cocoa mb-1">擔綱角色 *</label>
+            <input type="text" id="formRole" required placeholder="例如：PM & UI/UX 設計師"
+              class="w-full px-4 py-2.5 rounded-2xl bg-morandi-card border border-morandi-border text-sm text-morandi-cocoa focus:outline-none focus:ring-2 focus:ring-morandi-sage">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-morandi-cocoa mb-1">使用工具 / 技術 (逗號分隔)</label>
+          <input type="text" id="formTools" placeholder="Figma, Live2D, Excel 檢定, n8n"
+            class="w-full px-4 py-2.5 rounded-2xl bg-morandi-card border border-morandi-border text-sm text-morandi-cocoa focus:outline-none focus:ring-2 focus:ring-morandi-sage">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-morandi-cocoa mb-1">簡短摘要 (卡片展示用) *</label>
+          <textarea id="formSummary" rows="2" required placeholder="簡述專案的核心亮點與解決的問題..."
+            class="w-full px-4 py-2.5 rounded-2xl bg-morandi-card border border-morandi-border text-sm text-morandi-cocoa focus:outline-none focus:ring-2 focus:ring-morandi-sage"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-morandi-cocoa mb-1">專案挑戰與解決方案 (Detail Modal 內容)</label>
+          <textarea id="formDescription" rows="3" placeholder="詳細說明挑戰、設計思考過程與成果影響力..."
+            class="w-full px-4 py-2.5 rounded-2xl bg-morandi-card border border-morandi-border text-sm text-morandi-cocoa focus:outline-none focus:ring-2 focus:ring-morandi-sage"></textarea>
+        </div>
+
+        <!-- Links Input Group -->
+        <div class="p-4 bg-morandi-card rounded-2xl border border-morandi-border space-y-3">
+          <span class="block text-xs font-bold text-morandi-cocoa"><i
+              class="fa-solid fa-link text-morandi-pink mr-1"></i> 多媒體與雲端連結設定</span>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] text-morandi-taupe mb-1">YouTube 影片連結 (Watch/Share URL)</label>
+              <input type="url" id="formYoutube" placeholder="https://www.youtube.com/watch?v=..."
+                class="w-full px-3 py-2 rounded-xl bg-morandi-bg border border-morandi-border text-xs text-morandi-cocoa">
+            </div>
+            <div>
+              <label class="block text-[11px] text-morandi-taupe mb-1">Google Drive 企劃書 / 雲端資料夾</label>
+              <input type="url" id="formDrive" placeholder="https://drive.google.com/..."
+                class="w-full px-3 py-2 rounded-xl bg-morandi-bg border border-morandi-border text-xs text-morandi-cocoa">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] text-morandi-taupe mb-1">Figma 原型 / 設計稿連結</label>
+              <input type="url" id="formFigma" placeholder="https://figma.com/file/..."
+                class="w-full px-3 py-2 rounded-xl bg-morandi-bg border border-morandi-border text-xs text-morandi-cocoa">
+            </div>
+            <div>
+              <label class="block text-[11px] text-morandi-taupe mb-1">縮圖圖片網址 (Image URL)</label>
+              <input type="url" id="formImage" placeholder="https://placehold.co/600x400/EFECE6/5C4D43?text=Project"
+                class="w-full px-3 py-2 rounded-xl bg-morandi-bg border border-morandi-border text-xs text-morandi-cocoa">
+            </div>
+          </div>
+
+          <!-- Local Video File Selection -->
+          <div class="pt-2 border-t border-morandi-border/60">
+            <label class="block text-[11px] font-semibold text-morandi-cocoa mb-1">或選擇本機影片檔 (.mp4, .webm)</label>
+            <input type="file" id="formLocalVideo" accept="video/*" onchange="handleLocalVideoSelect(event)"
+              class="text-xs text-morandi-taupe file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-morandi-sage file:text-white hover:file:bg-morandi-sageDark">
+            <span id="localVideoStatus" class="block text-[11px] text-morandi-pink font-medium mt-1"></span>
+          </div>
+        </div>
+
+        <div class="pt-4 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeAddModal()"
+            class="px-5 py-2.5 rounded-2xl text-xs font-semibold text-morandi-taupe hover:bg-morandi-card transition-all">
+            取消
+          </button>
+          <button type="submit"
+            class="bg-morandi-sage hover:bg-morandi-sageDark text-white px-6 py-2.5 rounded-2xl text-xs font-semibold shadow-md transition-all">
+            儲存專案內容
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>
